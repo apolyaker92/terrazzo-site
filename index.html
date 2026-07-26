@@ -3,26 +3,118 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Terrazzo, a Comic &amp; Manga Reader</title>
+<title>Terrazzo, a Comic &amp; Manga Reader for iPhone and iPad</title>
+<meta name="description" content="A comic and manga reader that reads your files wherever they already live: on your device, a NAS over SMB, iCloud Drive, or your own Komga server. It never copies or moves anything.">
 <style>
   :root { color-scheme: light dark; }
   body {
     font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     max-width: 42rem; margin: 0 auto; padding: 3.5rem 1.25rem 5rem;
   }
-  h1 { font-size: 2rem; margin-bottom: .25rem; }
-  .tagline { color: #767676; margin-top: 0; font-size: 1.05rem; }
-  h2 { font-size: 1.15rem; margin-top: 2.5rem; }
+  h1 { font-size: 2.4rem; margin-bottom: .25rem; letter-spacing: -.02em; }
+  .tagline { color: #767676; margin-top: 0; font-size: 1.15rem; }
+  h2 { font-size: 1.15rem; margin-top: 2.75rem; }
+  h3 { font-size: 1rem; margin-top: 1.75rem; margin-bottom: .25rem; }
   ul { padding-left: 1.25rem; }
   li { margin-bottom: .4rem; }
   a { color: inherit; }
-  footer { margin-top: 3.5rem; font-size: .9rem; color: #767676; }
+  .lede { font-size: 1.05rem; }
+  .cta {
+    display: inline-block; margin: 1.75rem 0 .5rem;
+    padding: .7rem 1.4rem; border-radius: 999px;
+    background: #0071e3; color: #fff; text-decoration: none;
+    font-weight: 600;
+  }
+  .cta-note { color: #767676; font-size: .9rem; margin-top: .5rem; }
+  .shots {
+    display: flex; gap: .75rem; overflow-x: auto;
+    margin: 2rem -1.25rem; padding: 0 1.25rem;
+  }
+  .shots img {
+    width: 220px; flex: 0 0 auto; border-radius: 14px;
+    border: 1px solid rgba(128,128,128,.25);
+  }
+  .note {
+    border-left: 3px solid rgba(128,128,128,.35);
+    padding-left: 1rem; color: #767676;
+  }
+  footer { margin-top: 4rem; font-size: .9rem; color: #767676; }
 </style>
 </head>
 <body>
 
 <h1>Terrazzo</h1>
 <p class="tagline">A comic &amp; manga reader for iPhone and iPad.</p>
+
+<p class="lede">
+  Terrazzo reads your comics wherever they already live: on your device, on a
+  NAS over SMB, in iCloud Drive, or on your own Komga server. It never copies,
+  moves or changes your files. The app keeps a catalogue of where things are
+  and how far you have read. Your library stays exactly where you put it.
+</p>
+
+<!--
+  SCREENSHOTS: add 3 to 5 PNGs to this folder, then delete the comment markers
+  around the block below. Good ones to use, in order:
+    1. Library grid with series stacks (shows it full of real comics)
+    2. A page mid-read, ideally a double-page spread in landscape
+    3. The network share browser, since SMB is the differentiator
+    4. Series detail with ratings and reviews
+  Filenames below are placeholders. Wide screenshots read better than tall
+  ones on this page.
+
+<div class="shots">
+  <img src="shot-library.png" alt="Library grid showing comic covers grouped into series">
+  <img src="shot-reader.png" alt="A comic page open in the reader">
+  <img src="shot-share.png" alt="Browsing a network share to add comics">
+</div>
+-->
+
+<a class="cta" href="#">Join the TestFlight beta</a>
+<p class="cta-note">
+  Public beta, limited to 100 testers. Requires iOS 26.
+</p>
+
+<h2>Streaming from a NAS, without downloading</h2>
+<p>
+  Opening a CBZ over SMB does not download it. Terrazzo reads the ZIP
+  end-of-central-directory record off the end of the file, parses the central
+  directory, then fetches individual pages by byte range as you turn them. A
+  400 MB volume opens in roughly the time it takes to read the last 64 KB of
+  it. Covers, embedded metadata and page turns all work the same way.
+</p>
+<p>
+  The result is that a large library on a network share behaves like a local
+  one, without filling up your phone.
+</p>
+
+<h2>What it does</h2>
+<ul>
+  <li>CBZ, CBR and PDF</li>
+  <li>Reads embedded ComicInfo.xml, and falls back to parsing filenames</li>
+  <li>Right-to-left reading and double-page spreads for manga, detected from
+      tags rather than guessed</li>
+  <li>Printed two-page spreads are recognised and never squeezed alongside
+      another page</li>
+  <li>Series grouping, collections, bookmarks, ratings and reviews</li>
+  <li>Sources: local files, SMB network shares, iCloud Drive, and Komga</li>
+  <li>Optional iCloud sync for reading progress across your own devices</li>
+  <li>Optional one-to-one sharing with a friend: swap ratings and reviews,
+      reply to each other, recommend things. Invite only, no accounts.</li>
+</ul>
+
+<h2>Privacy</h2>
+<p>
+  No analytics, no crash reporting SDK, no accounts, and no server of ours
+  anywhere. The App Store privacy label reads "Data Not Collected" and it is
+  accurate. The only network traffic Terrazzo makes is to your own iCloud
+  account, your own network share or Komga server, and optional metadata
+  lookups you turn on yourself.
+</p>
+<p>
+  Even the bug report button opens your own mail client rather than sending
+  anything. Full details in the <a href="privacy.html">privacy policy</a>.
+</p>
 
 <h2>Support</h2>
 <p>
@@ -37,32 +129,41 @@
 
 <h2>Common questions</h2>
 
-<p><strong>Where are my comics stored?</strong><br>
-On your device, or wherever you keep them: a network share, iCloud Drive, or a
-Komga server. Terrazzo reads them where they live and never uploads them.</p>
-
-<p><strong>What does iCloud sync actually sync?</strong><br>
-Your reading progress, bookmarks, lists, ratings and reviews. Not the comic
-files themselves. It uses your own private iCloud storage.</p>
-
-<p><strong>I read a comic on another device and progress didn't carry over.</strong><br>
-Both devices need to be signed into the same Apple Account with iCloud sync
-turned on, and both need to have scanned the same comic. Progress is matched to
-the file, so a device that hasn't seen the file yet has nothing to apply it
-to.</p>
-
-<p><strong>Do you see my library?</strong><br>
-No. There is no Terrazzo server. See the
-<a href="privacy.html">privacy policy</a>.</p>
-
-<h2>Privacy</h2>
+<h3>Where are my comics stored?</h3>
 <p>
-  Terrazzo collects nothing and tracks nobody. Full details in the
+  On your device, or wherever you keep them: a network share, iCloud Drive, or
+  a Komga server. Terrazzo reads them where they live and never uploads them.
+</p>
+
+<h3>What does iCloud sync actually sync?</h3>
+<p>
+  Your reading progress, bookmarks, lists, ratings and reviews. Not the comic
+  files themselves. It uses your own private iCloud storage.
+</p>
+
+<h3>I read a comic on another device and progress didn't carry over.</h3>
+<p>
+  Both devices need to be signed into the same Apple Account with iCloud sync
+  turned on, and both need to have scanned the same comic. Progress is matched
+  to the file, so a device that hasn't seen the file yet has nothing to apply
+  it to.
+</p>
+
+<h3>Do you see my library?</h3>
+<p>
+  No. There is no Terrazzo server. See the
   <a href="privacy.html">privacy policy</a>.
 </p>
 
+<h3>Does Terrazzo find or download comics for me?</h3>
+<p>
+  No. It has no catalogue, no store and no search for content. It only opens
+  files you already have and point it at.
+</p>
+
 <footer>
-  Terrazzo, a comic and manga reader.
+  Terrazzo, a comic and manga reader for iPhone and iPad.
+  <a href="privacy.html">Privacy</a>.
 </footer>
 
 </body>
